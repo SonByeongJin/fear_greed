@@ -19,7 +19,7 @@ def deduplicate_by_date(data):
             result.append(item)
     return result
 
-def fetch_fng_history():
+def fetch_fng_history(days: int = 90):
     url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
     headers = {
         "User-Agent": (
@@ -37,7 +37,7 @@ def fetch_fng_history():
     full_data = raw["fear_and_greed_historical"]["data"]
     deduplicate_data = deduplicate_by_date(full_data)
 
-    last_365 = deduplicate_data[-365:]
+    last_365 = deduplicate_data[-days:]
 
     formatted = [
         {
@@ -51,5 +51,5 @@ def fetch_fng_history():
 
 if __name__ == "__main__":
     import json
-    result = fetch_fng_history()
-    print(json.dumps(result[-5:], indent=2))
+    result = fetch_fng_history(10)
+    print(result)
