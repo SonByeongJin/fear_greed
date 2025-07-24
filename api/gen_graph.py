@@ -30,7 +30,7 @@ def create_fear_greed_graph(days: int = 90, save_path: str = "gen_data/fear_gree
         values = [item['value'] for item in data]
         
         # 그래프 생성
-        fig, ax = plt.subplots(figsize=(14, 8))
+        fig, ax = plt.subplots(figsize=(12, 8))
         
         # 배경을 검은색으로 설정
         ax.set_facecolor('black')
@@ -58,16 +58,20 @@ def create_fear_greed_graph(days: int = 90, save_path: str = "gen_data/fear_gree
         ax.set_xlabel('')
         ax.set_ylabel('')
         
-        # 제목 설정
-        title_text = "Fear & Greed Index"
-        subtitle_text = f"(Last {days} days)"
-        
-        ax.text(0.5, 0.95, title_text, transform=ax.transAxes, 
-                fontsize=20, fontweight='bold', color='white', 
-                ha='center', va='top')
-        ax.text(0.5, 0.90, subtitle_text, transform=ax.transAxes, 
-                fontsize=14, color='#CCCCCC', 
-                ha='center', va='top')
+        # 제목 설정 제거
+        # title_text = "Fear & Greed Index"
+        # subtitle_text = f"(Last {days} days)"
+        # ax.text(0.5, 0.95, title_text, transform=ax.transAxes, 
+        #         fontsize=20, fontweight='bold', color='white', 
+        #         ha='center', va='top')
+        # ax.text(0.5, 0.90, subtitle_text, transform=ax.transAxes, 
+        #         fontsize=14, color='#CCCCCC', 
+        #         ha='center', va='top')
+        # last_updated 변수 선언 추가
+        last_updated = datetime.now().strftime("Last updated: %Y-%m-%d %H:%M")
+        # 우측 상단에 last updated
+        ax.text(0.99, 0.99, last_updated, transform=ax.transAxes,
+                fontsize=18, color='#CCCCCC', ha='right', va='top')
         
         # 축 테두리 색상 설정
         ax.spines['top'].set_visible(False)

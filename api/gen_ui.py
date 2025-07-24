@@ -35,7 +35,7 @@ def create_fear_greed_gauge(value: float, status: str, save_path: str = "gen_dat
         save_path: 저장할 파일 경로
     """
     # 그림 크기 설정
-    fig, ax = plt.subplots(figsize=(12, 8))
+    fig, ax = plt.subplots(figsize=(8, 8))
     ax.set_xlim(-1.2, 1.2)
     ax.set_ylim(-0.2, 1.2)
     ax.set_aspect('equal')
@@ -87,23 +87,23 @@ def create_fear_greed_gauge(value: float, status: str, save_path: str = "gen_dat
     ax.add_patch(center_circle)
     
     # 값 표시
-    ax.text(0, -0.3, f"{int(value)}", fontsize=62, fontweight='bold', 
+    ax.text(0, -0.3, f"{int(value)}", fontsize=44, fontweight='bold', 
             color='white', ha='center', va='center')
     
     # 상태 텍스트
     status_color = get_status_color(status)
     korean_status = get_status_korean(status)
-    ax.text(0, -0.5, korean_status, fontsize=48, fontweight='bold',
+    ax.text(0, -0.5, korean_status, fontsize=35, fontweight='bold',
             color=status_color, ha='center', va='center')
     
     # 현재 시간 표시
     current_time = datetime.now().strftime("%Y. %m. %d. %p %I:%M")
-    ax.text(0, -0.7, f"Last updated: {current_time}", fontsize=27,
+    ax.text(0, -0.7, f"Last updated: {current_time}", fontsize=19,
             color='#888888', ha='center', va='center')
     
-    # 제목
-    ax.text(0, 1.1, "Fear & Greed Index", fontsize=20, fontweight='bold',
-            color='white', ha='center', va='center')
+    # 제목 제거
+    # ax.text(0, 1.1, "Fear & Greed Index", fontsize=20, fontweight='bold',
+    #         color='white', ha='center', va='center')
     
     plt.tight_layout()
     plt.savefig(save_path, facecolor='black', bbox_inches='tight', dpi=300)
