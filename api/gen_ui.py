@@ -5,7 +5,6 @@ import numpy as np
 from datetime import datetime, timezone, timedelta
 from api.fgi_cnn import fetch_fng_history
 import matplotlib.font_manager as fm
-from PIL import Image
 
 # 한글 폰트 설정
 plt.rcParams['font.family'] = 'DejaVu Sans'
@@ -111,10 +110,6 @@ def create_fear_greed_gauge(value: float, status: str, save_path: str = "gen_dat
     plt.tight_layout()
     plt.savefig(save_path, facecolor='black', bbox_inches='tight', dpi=300)
     plt.close()
-    # Pillow로 다운사이징
-    img = Image.open(save_path)
-    img = img.resize((200, 200), Image.LANCZOS)
-    img.save(save_path)
     return save_path
 
 def generate_latest_gauge(days: int = 1, save_path: str = "gen_data/fear_greed_score.png"):

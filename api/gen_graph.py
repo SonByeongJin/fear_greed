@@ -3,7 +3,6 @@ import matplotlib.dates as mdates
 from datetime import datetime, timezone, timedelta
 import numpy as np
 from api.fgi_cnn import fetch_fng_history
-from PIL import Image
 
 # 그래프 스타일 설정
 plt.style.use('dark_background')
@@ -89,10 +88,6 @@ def create_fear_greed_graph(days: int = 90, save_path: str = "gen_data/fear_gree
         plt.tight_layout()
         plt.savefig(save_path, facecolor='black', bbox_inches='tight', dpi=300)
         plt.close()
-        # Pillow로 다운사이징
-        img = Image.open(save_path)
-        img = img.resize((300, 200), Image.LANCZOS)
-        img.save(save_path)
         return save_path
         
     except Exception as e:
