@@ -1,11 +1,13 @@
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
 import numpy as np
 from api.fgi_cnn import fetch_fng_history
 
 # 그래프 스타일 설정
 plt.style.use('dark_background')
+
+KST = timezone(timedelta(hours=9))
 
 def create_fear_greed_graph(days: int = 90, save_path: str = "gen_data/fear_greed_graph.png"):
     """
@@ -68,7 +70,7 @@ def create_fear_greed_graph(days: int = 90, save_path: str = "gen_data/fear_gree
         #         fontsize=14, color='#CCCCCC', 
         #         ha='center', va='top')
         # last_updated 변수 선언 추가
-        last_updated = datetime.now().strftime("Last updated: %Y-%m-%d %H:%M")
+        last_updated = datetime.now(KST).strftime("Last updated: %Y-%m-%d %H:%M")
         # 우측 상단에 last updated
         ax.text(0.99, 0.99, last_updated, transform=ax.transAxes,
                 fontsize=18, color='#CCCCCC', ha='right', va='top')

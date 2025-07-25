@@ -2,13 +2,15 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.patches import Arc, FancyBboxPatch
 import numpy as np
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from api.fgi_cnn import fetch_fng_history
 import matplotlib.font_manager as fm
 
 # 한글 폰트 설정
 plt.rcParams['font.family'] = 'DejaVu Sans'
 plt.rcParams['axes.unicode_minus'] = False
+
+KST = timezone(timedelta(hours=9))
 
 def get_status_color(status: str) -> str:
     """상태에 따른 색상 반환"""
@@ -97,7 +99,7 @@ def create_fear_greed_gauge(value: float, status: str, save_path: str = "gen_dat
             color=status_color, ha='center', va='center')
     
     # 현재 시간 표시
-    current_time = datetime.now().strftime("%Y. %m. %d. %p %I:%M")
+    current_time = datetime.now(KST).strftime("%Y. %m. %d. %p %I:%M")
     ax.text(0, -0.7, f"Last updated: {current_time}", fontsize=19,
             color='#888888', ha='center', va='center')
     
